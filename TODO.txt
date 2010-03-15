@@ -1,0 +1,12 @@
+
+- Add author and credit information
+- Add notion of statistical significance based on Vanity ala http://20bits.com/articles/statistical-analysis-and-ab-testing/
+- Allow ability to clear the data from a test
+- Add IP restriction on report.php
+- Have metrics that can have size, and related results that would be distributions : E.g. # of Pages viewed. This would be more complicated.
+- Fix date_time issues where I just use unicode time and not proper date math (can't find docs for date match in PHP 5.2)
+
+
+Suggestions
+- Have an option on a metric so that it is only initialized upon request
+- Have a flag where this runs without redis for debugging (e.g. file-based or sqlite)

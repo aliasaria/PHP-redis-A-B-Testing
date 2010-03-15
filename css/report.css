@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+
+body { xfont-family: Zapfino, cursive; font-family: “Helvetica Neue”, Helvetica, Arial, sans-serif}
+xh1 { padding-left: 0.5em; font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 24px; font-weight: 100; letter-spacing: 1px; color: #eee; background-color: #333;}
+
+h1 { padding-left: 0.5em; font-family: Zapfino, cursive; font-size: 24px; font-weight: 100; letter-spacing: 1px; color: #eee; background-color: #333;}
+h2 { padding-left: 0px; font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -6px; color: #999; margin: 0}
+h3 { margin: 0; padding: 0; padding-top: 20px; font-family: Zapfino, cursive; line-height: 1.1em; font-weight: normal; font-size: 24px;}
+p  { margin: 0; padding: 0; padding-top: 5px; font-family: Zapfino, cursive; line-height: 1.1em;}
+
+hr { border: 0px solid white; border-top: 2px dotted #666;
+color: white;
+height: 1px;}
+
+.indent {padding-left: 1em}
+.results { margin: 0; padding: 0; padding-left: 1em; font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; letter-spacing: -0px; color: #444; line-height: 1.1em}
+.alternative {  text-decoration: underline; color: #666; }
+.alternatives { xfloat: left; }
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+a.button {
+    background: transparent url('bg_button_a.gif') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+a.button span {
+    background: transparent url('bg_button_span.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px; /* push text down 1px */
+}
+
+.forced-text {
+	font-family: “Helvetica Neue”, Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	color: #999;
+}

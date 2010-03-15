@@ -1,0 +1,24 @@
+Author:
+This project is by Ali Asaria created for Well.ca Inc. 2010. The idea for the program is based on the
+project "Vanity" by Assaf Arkin -- a Rails A/B testing tool.
+
+The philosophy behind this program is 
+
+
+About Well.ca:
+Well.ca is Canada's largest online health and beauty store.
+
+
+License:
+
+
+
+Credits:
+
+- Idea and style inspired by Vanity for Rails by Assaf Arkin http://vanity.labnotes.org/
+- See Assaf's credits here: http://vanity.labnotes.org/credits.html
+- Redis client library - Redis PHP Bindings - http://code.google.com/p/redis/ - Copyright 2009 Ludovico Magnocavallo, Copyright 2009 Salvatore Sanfilippo - Released under the same license as Redis.
+- jQuery by John Resig - http://jquery.com/ - MIT License or (GPL) Version 2.
+- Flot copyright of IOLA and Ole Laursen, released under the MIT license.
+- Buttons http://www.halmatferello.com/lab/pure-css-buttons/ Licensed under GPL and MIT.
+
