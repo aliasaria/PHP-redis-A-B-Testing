@@ -60,6 +60,10 @@ function ab_values($metric, $from, $to)
 	
 	$ut_diff_in_days = $ut_diff / 24 / 60 / 60;
 	
+	
+	//i am adding an extra day just to fix the bug.
+	//this whole function needs to be rewritten with proper math
+	$ut_diff_in_days += 1;
 	//if ($ut_diff_in_days > 90) $ut_diff_in_days = 90;
 	
 	if ($ut_diff_in_days < 1) $ut_diff_in_days = 0;

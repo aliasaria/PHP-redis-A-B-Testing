@@ -122,7 +122,7 @@ function ab_track($metric, $value = 1)
 	{
 		if ($ab_participant_id != -1)
 		{
-			ab_metrics_track($metric, $value = 1);
+			ab_metrics_track($metric, $value);
 		}
 	}
 	else
