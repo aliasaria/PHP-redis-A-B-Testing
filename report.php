@@ -61,9 +61,18 @@ if (isset($_GET['force']))
 	$alt = $_GET['alt'];
 	
 	if ($alt != "!!null!!")
-		ab_tests_force_alternative($test, $alt);
+		ab_tests_force_alternative(urldecode($test), urldecode($alt));
 	else
-		ab_tests_force_alternative($test, null);
+		ab_tests_force_alternative(urldecode($test), null);
+}
+
+
+
+
+//do forced alternative logic if necessary
+if (isset($_GET['clear-all-data']))
+{
+	erase_all_keys_except_forced_keys();
 }
 
 ?>
@@ -132,13 +141,13 @@ foreach ($ab_tests as $test)
 		
 		if ($forced_alternative != $alt)
 		{
-			echo '  <a href="?force=true&test=' . $test['name'] . '&alt=' . $alt . '#'. $name .'" class="grey-button pcb">
+			echo '  <a href="?force=true&test=' . urlencode($test['name']) . '&alt=' . urlencode($alt) . '#'. urlencode($name) .'" class="grey-button pcb">
 			<span style="color: #666;">Show Always</span>
 			</a>';
 		}
 		else
 		{
-			echo ' <span class="forced-text">Always Showing</span> <a href="?force=true&test=' . $test['name'] . '&alt=' . "!!null!!" . '#'. $name .'" class="red-disabled-button pcb">
+			echo ' <span class="forced-text">Always Showing</span> <a href="?force=true&test=' . urlencode($test['name']) . '&alt=' . "!!null!!" . '#'. urlencode($name) .'" class="red-disabled-button pcb">
 			<span style="color: #333;">Clear</a>
 			</span>';
 		}
@@ -321,5 +330,9 @@ $(function () {
 ?>
 
 
+
+
+<hr/>
+<a href="?clear-all-data=true" class="red-button pcb"><span>Clear All Data</span></a>
 </body>
 </html>

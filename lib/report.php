@@ -187,3 +187,40 @@ function ab_tests_conclusion($test)
 	
 	return($r);
 }
+
+
+function erase_all_keys_except_forced_keys()
+{
+		global $r;
+		
+		/////////////////////////////////////////
+		//First get all the keys you want to save
+		/////////////////////////////////////////
+		$force_keys = array();
+		$force_vals = array();
+		
+		//the redis "keys" function searches for keys that match a specified pattern
+		$force_keys = $r->keys("ab:*:force");
+		
+		foreach($force_keys as $key)
+		{
+			$force_vals[] = $r->get($key);
+		}
+		
+		print_r($force_keys);
+		print_r($force_vals);
+		
+		
+		/////////////////////////////////////////
+		//Now erase everything else
+		/////////////////////////////////////////
+		$r->flushdb();
+		
+		/////////////////////////////////////////
+		//Now restore the forced keys
+		/////////////////////////////////////////
+		for ($i = 0; $i < count(force_keys); $i++)
+		{
+			$r->set($force_keys[$i], $force_vals[$i]);
+		}
+}
