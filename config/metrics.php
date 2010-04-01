@@ -1,4 +1,5 @@
 <?php
+$ab_metrics = array();
 
 //example:
 /*

@@ -207,8 +207,8 @@ function erase_all_keys_except_forced_keys()
 			$force_vals[] = $r->get($key);
 		}
 		
-		print_r($force_keys);
-		print_r($force_vals);
+		//print_r($force_keys);
+		//print_r($force_vals);
 		
 		
 		/////////////////////////////////////////
@@ -219,7 +219,7 @@ function erase_all_keys_except_forced_keys()
 		/////////////////////////////////////////
 		//Now restore the forced keys
 		/////////////////////////////////////////
-		for ($i = 0; $i < count(force_keys); $i++)
+		for ($i = 0; $i < count($force_keys); $i++)
 		{
 			$r->set($force_keys[$i], $force_vals[$i]);
 		}

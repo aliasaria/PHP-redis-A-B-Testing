@@ -1,4 +1,5 @@
 <?php
+$ab_tests = array();
 //example:
 /*
 $ab_tests['checkout_button_color'] = array(
