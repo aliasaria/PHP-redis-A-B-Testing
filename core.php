@@ -116,7 +116,7 @@ function ab_test($test)
  */
 function ab_track($metric, $value = 1)
 {
-	global $redis_connected;
+	global $redis_connected, $ab_participant_id;
 
 	if ($redis_connected)
 	{
