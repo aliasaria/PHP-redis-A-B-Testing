@@ -281,6 +281,12 @@ class Redis {
         return $this->flush(true);
     }
     
+	public function dbsize() {
+        $this->connect();
+        $this->write("DBSIZE\r\n");
+        return $this->get_response();
+    }
+    
     public function info() {
         $this->connect();
         $this->write("INFO\r\n");

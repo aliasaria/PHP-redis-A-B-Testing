@@ -173,6 +173,14 @@ foreach ($ab_tests as $test)
 	
 	//echo 'Test is active: <p><a class="button" href="#"><span>Stop this test</span></a></p><br/><br/>';
 	
+	$metrics = $test['metrics'];
+	
+	$metrics = implode(", ", $metrics);
+	
+	echo "<br/><br/><p class=\"results\" style=''>(For this test,
+	a conversion is marked by any of these events: <span style='color: #666; font-weight: bold'>$metrics</span>
+	)</p>";
+	
 	
     $chart_data = json_encode($array_of_conversion_rates);
     
@@ -233,7 +241,7 @@ $(function () {
 	$conclusion = ab_tests_conclusion($test['name']);
 	
 	echo "<p class=\"indent\" style='color: #556; font-size: 12px'>" . $conclusion . "</p>";
-       
+			
 	echo "<hr/>";
 	
 	
@@ -334,5 +342,17 @@ $(function () {
 
 <hr/>
 <a href="?clear-all-data=true" class="red-button pcb"><span>Clear All Data</span></a>
+<?php 
+
+$info =  $r->info();
+$mem = $info['used_memory'];
+
+$mem = round($mem / 1024, 1);
+
+$num_keys = $r->dbsize();
+
+echo "<br><br><p style='color: #556; font-size: 12px'>Memory used: $mem KBytes, Number of keys: $num_keys";
+
+?>
 </body>
 </html>
