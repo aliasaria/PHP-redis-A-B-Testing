@@ -26,23 +26,11 @@ include('config/tests.php');
 include('lib/metrics.php');
 include('lib/tests.php');
 
-$ab_participant_id = -1;
-
 /*
- * Try to connect to redis
+ * Initialize variables
  */
-$r =& new Redis($config['redis_host'],$config['redis_port']);
-$redis_connected = $r->connect();
-
-
-if ($redis_connected)
-{
-	$r->select_db($config['redis_db_number']);
-	//$r->flushdb();
-}
-else
-{
-}
+$ab_participant_id = -1;
+$redis_connected = false;
 
 
 /************************************
@@ -60,17 +48,42 @@ else
  */
 
 /**
- *
- * Sets the unique participant ID for the current visitor
+ * Initializes the tests, connects to redis, and
+ * sets the unique participant ID for the current visitor
  * this must be set once and must be done before using any
  * other of the ab testing functions.
+ * 
+ * If you do not call this function, the other functions
+ * below will still work and they will behave as though
+ * redis isn't connected. So metrics will not be tracked
+ * and tests will return randomized results but also not
+ * be tracked. This can be used to deactive the redis-
+ * dependant portion of this code. So for example if you
+ * have developer instances of this code that do not have
+ * access to redis, you can simply comment out this following
+ * function and everything else in your code will still
+ * work even if it calls ab_track
+ * 
  * @param $id - the unique ID of the visitor
  * @return (nothing)
  */
-function ab_participant_id ($id)
+function ab_init ($id = -1)
 {
-	global $ab_participant_id;
-	global $redis_connected;
+	global	$ab_participant_id,
+			$redis_connected,
+			$r;
+	
+	/*
+	 * Try to connect to redis
+	 */
+	$r =& new Redis($config['redis_host'],$config['redis_port']);
+	$redis_connected = $r->connect();
+	
+	if ($redis_connected)
+	{
+		$r->select_db($config['redis_db_number']);
+		//$r->flushdb();
+	}
 
 	$ab_participant_id = $id;
 
@@ -80,6 +93,14 @@ function ab_participant_id ($id)
 		ab_metrics_initialize();
 		ab_tests_initialize();
 	}
+}
+
+//deprecated -- do not use this function. replaced by init
+//this function will be dropped in the next release
+function ab_participant_id ($id)
+{
+	trigger_error("ab_test - function ab_participant_id() is DEPRECATED. please us ab_init() instead.", E_USER_WARNING);
+	ab_init($id);
 }
 
 /**
