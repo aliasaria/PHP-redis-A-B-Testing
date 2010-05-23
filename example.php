@@ -9,7 +9,7 @@ if (isset($_GET['uid']))
 	$participant_id = $_GET['uid'];
 
 //STEP 1: SET THE PARTICIPANT ID
-ab_init($participant_id, true);
+ab_init($participant_id, false);
 
 // implement logic based on submission status
 if (isset($_POST['submit_action']))
