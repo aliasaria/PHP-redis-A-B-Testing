@@ -65,33 +65,42 @@ $redis_connected = false;
  * work even if it calls ab_track
  * 
  * @param $id - the unique ID of the visitor
+ * @param $developer_mode_no_redis - set this to true if you do not have redis
+ * 		this will disable logging but make everything else work fine
+ * 		use this flag for developer machines that do not have redis
  * @return (nothing)
  */
-function ab_init ($id = -1)
+function ab_init ($id = -1, $developer_mode_no_redis = false)
 {
 	global	$ab_participant_id,
 			$redis_connected,
 			$r;
-	
+			
+	$ab_participant_id = $id;
+			
 	/*
 	 * Try to connect to redis
 	 */
-	$r =& new Redis($config['redis_host'],$config['redis_port']);
-	$redis_connected = $r->connect();
 	
-	if ($redis_connected)
+	if ($developer_mode_no_redis)
 	{
-		$r->select_db($config['redis_db_number']);
-		//$r->flushdb();
+		$redis_connected = false;
+		return;
 	}
-
-	$ab_participant_id = $id;
-
-	if ($redis_connected)
+	else
 	{
-		//set up the metrics (this should loop through them and link them to associated ab tests
-		ab_metrics_initialize();
-		ab_tests_initialize();
+		$r =& new Redis($config['redis_host'],$config['redis_port']);
+		$redis_connected = $r->connect();
+		
+		if ($redis_connected)
+		{
+			$r->select_db($config['redis_db_number']);
+			
+			//set up the metrics (this should loop through them and link them to associated ab tests
+			ab_metrics_initialize();
+			ab_tests_initialize();
+			
+		}
 	}
 }
 
@@ -100,7 +109,7 @@ function ab_init ($id = -1)
 function ab_participant_id ($id)
 {
 	trigger_error("ab_test - function ab_participant_id() is DEPRECATED. please us ab_init() instead.", E_USER_WARNING);
-	ab_init($id);
+	ab_init($id, false);
 }
 
 /**
