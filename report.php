@@ -22,8 +22,8 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
     echo '<p style=\"font-family: Zapfino, cursive;\">Text to send if user hits Cancel button</p>';
     exit;
 } else if (
-				$_SERVER['PHP_AUTH_USER'] != $config['ADMIN_USERNAME'] &&
-				$_SERVER['PHP_AUTH_PW']   != $config['ADMIN_PASSWORD']
+				$_SERVER['PHP_AUTH_USER'] != $ab_config['ADMIN_USERNAME'] &&
+				$_SERVER['PHP_AUTH_PW']   != $ab_config['ADMIN_PASSWORD']
 		) 
 {
 	header('WWW-Authenticate: Basic realm="My Realm"');
@@ -38,12 +38,12 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 
 
 //connect to redis
-$r =& new Redis($config['redis_host']);
+$r =& new Redis($ab_config['redis_host']);
 $connected = $r->connect();
 
 if ($connected)
 {
-	$r->select_db($config['redis_db_number']); //should make it configurable later
+	$r->select_db($ab_config['redis_db_number']); //should make it configurable later
 	//$r->flushdb();
 }
 else

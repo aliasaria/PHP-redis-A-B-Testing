@@ -89,12 +89,12 @@ function ab_init ($id = -1, $developer_mode_no_redis = false)
 	}
 	else
 	{
-		$r =& new Redis($config['redis_host'],$config['redis_port']);
+		$r =& new Redis($ab_config['redis_host'],$ab_config['redis_port']);
 		$redis_connected = $r->connect();
 		
 		if ($redis_connected)
 		{
-			$r->select_db($config['redis_db_number']);
+			$r->select_db($ab_config['redis_db_number']);
 			
 			//set up the metrics (this should loop through them and link them to associated ab tests
 			ab_metrics_initialize();
