@@ -31,6 +31,7 @@ include('lib/tests.php');
  */
 $ab_participant_id = -1;
 $redis_connected = false;
+$r = false;
 
 
 /************************************
@@ -74,6 +75,7 @@ function ab_init ($id = -1, $developer_mode_no_redis = false)
 {
 	global	$ab_participant_id,
 			$redis_connected,
+			$ab_config,
 			$r;
 			
 	$ab_participant_id = $id;
@@ -89,7 +91,7 @@ function ab_init ($id = -1, $developer_mode_no_redis = false)
 	}
 	else
 	{
-		$r =& new Redis($ab_config['redis_host'],$ab_config['redis_port']);
+		$r = new Redis($ab_config['redis_host'],$ab_config['redis_port']);
 		$redis_connected = $r->connect();
 		
 		if ($redis_connected)
