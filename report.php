@@ -38,7 +38,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 
 
 //connect to redis
-$r =& new Redis($ab_config['redis_host']);
+$r = new Redis($ab_config['redis_host']);
 $connected = $r->connect();
 
 if ($connected)
