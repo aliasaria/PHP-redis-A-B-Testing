@@ -43,7 +43,7 @@ $connected = $r->connect();
 
 if ($connected)
 {
-	$r->select_db($ab_config['redis_db_number']); //should make it configurable later
+	$r->select_db($ab_config['redis_db_number']);
 	//$r->flushdb();
 }
 else
