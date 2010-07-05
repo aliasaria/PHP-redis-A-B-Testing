@@ -64,17 +64,33 @@ if (isset($_GET['force']))
 		ab_tests_force_alternative(urldecode($test), urldecode($alt));
 	else
 		ab_tests_force_alternative(urldecode($test), null);
+		
+	//redirect to remove get params from URL
+	header('Location: ' . $_SERVER['PHP_SELF']);
 }
 
 
 
+//clear a specific test's data
+if (isset($_GET['clear-test']))
+{
+	$test = $_GET['test'];
+	
+	erase_data_for_test(urldecode($test));
+	
+	//redirect to remove get params from URL
+	header('Location: ' . $_SERVER['PHP_SELF']);	
+}
 
-//do forced alternative logic if necessary
+
+//clear all data if requested  -- but maintain forced tests
 if (isset($_GET['clear-all-data']))
 {
 	erase_all_keys_except_forced_keys();
+	
+	//redirect to remove get params from URL
+	header('Location: ' . $_SERVER['PHP_SELF']);
 }
-
 ?>
 <html>
 <head><title>a/b testing report</title></head>
@@ -241,6 +257,9 @@ $(function () {
 	$conclusion = ab_tests_conclusion($test['name']);
 	
 	echo "<p class=\"indent\" style='color: #556; font-size: 12px'>" . $conclusion . "</p>";
+			
+	echo '<br /><a href="?clear-test=true&test=' . $test['name'] . '" class="red-disabled-button pcb"><span>Clear This Test</span></a>';
+			
 			
 	echo "<hr/>";
 	

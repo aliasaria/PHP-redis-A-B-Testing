@@ -189,6 +189,24 @@ function ab_tests_conclusion($test)
 }
 
 
+function erase_data_for_test($test)
+{
+		global $r;
+				
+		//Find all keys that refer to this test using redis search functionality
+		//@FIXME: this wont work right if there is a * in the test name but i am not checking for this
+		$keys_to_delete = $r->keys("ab:test:$test:*");
+		
+		//print_r ($keys_to_delete);
+		
+		//try deleting these keys
+		foreach ($keys_to_delete as $key)
+		{
+			if ($key != null)
+				$r->delete($key);
+		}
+}
+
 function erase_all_keys_except_forced_keys()
 {
 		global $r;
